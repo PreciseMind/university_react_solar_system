@@ -2,9 +2,8 @@
 .wrap {
     width: 100%;
     height: 600px;
-    display: inline-block;
-    outline: dotted;
     overflow: hidden;
+    display: flex;
 }
 
 .textTitle {

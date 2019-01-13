@@ -1,23 +1,25 @@
 import React, {Component} from 'react'
 
-import Planet from '../Planet'
-import PlanetAnimation from '../PlanetAnimation'
+import Planet from '../planet'
+import PlanetAnimation from '../planetAnimation'
 
-export default class PlanetManager extends Component {
+export default class PlanetController extends Component {
+
     constructor(props) {
+
         super(props);
         this.deletePlanet = this.deletePlanet.bind(this);
         this.state = {
             planets: [
                 {
                     title: "Mercury",
-                    distance: 121,
+                    distance: 100,
                     isSelected: false,
                     radius: 25,
                     velocity: 8,
                     satellites: [
                         {
-                            title: "Mercury's sat1",
+                            title: "Mercury s1",
                             distance: 40,
                             isSelected: false,
                             radius: 10,
@@ -27,20 +29,20 @@ export default class PlanetManager extends Component {
                 },
                 {
                     title: "Venus",
-                    distance: 220,
+                    distance: 200,
                     isSelected: false,
                     radius: 45,
                     velocity: 9,
                     satellites: [
                         {
-                            title: "Venus's sat1",
+                            title: "Venus s1",
                             distance: 30,
                             isSelected: false,
                             radius: 15,
                             velocity: 5
                         },
                         {
-                            title: "Venus's sat2",
+                            title: "Venus s2",
                             distance: 45,
                             isSelected: false,
                             radius: 5,
@@ -50,12 +52,12 @@ export default class PlanetManager extends Component {
                 },
                 {
                     title: "Earth",
-                    distance: 340,
+                    distance: 300,
                     isSelected: false,
                     radius: 35,
                     velocity: 10,
                     satellites: [{
-                        title: "Earth's sat1",
+                        title: "Earth s1",
                         distance: 32,
                         isSelected: false,
                         radius: 15,
@@ -85,6 +87,7 @@ export default class PlanetManager extends Component {
 
 
     updatePlanet = (index, planetDataModel) => {
+
         let currentPlanets = this.state.planets;
         currentPlanets[index].title = planetDataModel.title;
         currentPlanets[index].radius = planetDataModel.radius;
@@ -95,6 +98,7 @@ export default class PlanetManager extends Component {
     };
 
     updateSatelline = (satellineIndex, satellineData) => {
+
         let currentPlanets = this.state.planets;
         currentPlanets.forEach((planet, index) => {
             if (planet.isSelected) {
@@ -106,6 +110,7 @@ export default class PlanetManager extends Component {
     };
 
     selectPlanet = (planetIndex) => {
+
         let currentPlanets = this.state.planets;
         currentPlanets.forEach((planet, index) => {
             if (planetIndex !== index) {
@@ -121,6 +126,7 @@ export default class PlanetManager extends Component {
     };
 
     selectSatelline = (satellineIndex) => {
+
         let currentPlanets = this.state.planets;
         currentPlanets.forEach((planet, index) => {
             if (planet.isSelected) {
@@ -139,6 +145,7 @@ export default class PlanetManager extends Component {
 
 
     addNewPlanet = () => {
+
         let minVelocity = 0;
         let maxVelocity = 32;
         let currentPlanets = this.state.planets;
@@ -146,7 +153,7 @@ export default class PlanetManager extends Component {
             title: "Default",
             distance: Math.floor(Math.random() * 50) + 30,
             radius: (Math.floor(Math.random() * 3) + 1) * 5,
-            velocity: Math.floor(Math.random()*(maxVelocity-minVelocity))+minVelocity,
+            velocity: Math.floor(Math.random() * (maxVelocity - minVelocity)) + minVelocity,
             isSelected: false,
             satellites: []
         };
@@ -155,7 +162,8 @@ export default class PlanetManager extends Component {
     };
 
 
-    addNewSatelline = () => {
+    addNewSatellite = () => {
+
         let currentPlanets = this.state.planets;
         currentPlanets.forEach((planet, index) => {
             if (planet.isSelected) {
@@ -163,10 +171,10 @@ export default class PlanetManager extends Component {
                 let maxVelocity = 32;
                 let currentSatellines = planet.satellites;
                 let newDefaultSatelline = {
-                    title: "Default's sat",
+                    title: "Default s",
                     distance: Math.floor(Math.random() * 50) + 30,
                     radius: (Math.floor(Math.random() * 3) + 1) * 5,
-                    velocity: Math.floor(Math.random()*(maxVelocity-minVelocity))+minVelocity,
+                    velocity: Math.floor(Math.random() * (maxVelocity - minVelocity)) + minVelocity,
                     isSelected: false
                 };
                 currentSatellines.push(newDefaultSatelline);
@@ -177,7 +185,9 @@ export default class PlanetManager extends Component {
     };
 
     render() {
+
         return (
+
             <div className="row">
                 <div className="col-sm-3">
                     <h3 className="text-center">Planets</h3>
@@ -194,7 +204,9 @@ export default class PlanetManager extends Component {
                             );
                         })
                     }
-                    <button onClick={this.addNewPlanet} className="btn btn-default">Add</button>
+                    <div className="text-center">
+                        <button onClick={this.addNewPlanet} className="btn btn-default">Add</button>
+                    </div>
                 </div>
                 <div className="col-sm-3">
                     <h3 className="text-center">Satellites</h3>
@@ -216,7 +228,9 @@ export default class PlanetManager extends Component {
                     {
                         this.state.planets.filter(planet => planet.isSelected).map((planet, planetIndex) => {
                             return (
-                                <button onClick={this.addNewSatelline} className="btn btn-default">Add</button>
+                                <div className="text-center">
+                                    <button onClick={this.addNewSatellite} className="btn btn-default">Add</button>
+                                </div>
                             );
                         })
                     }

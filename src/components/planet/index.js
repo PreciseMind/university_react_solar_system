@@ -1,35 +1,43 @@
 import React, {Component} from 'react'
 
 export default class Planet extends Component {
+
     constructor(props) {
         super(props);
     };
 
     editMode = () => {
+
         this.props.selectFunction(this.props.index)
     };
-    remove = () => {
+
+    delete = () => {
+
         this.setState({editMode: false});
         this.props.deleteFunction(this.props.index)
     };
+
     save = () => {
+
         var newPlanetTitle = this.refs.editTitleRef.value;
         var newPlanetRadius = this.refs.editRadiusRef.value;
         var newPlanetDistance = this.refs.editDistanceRef.value;
         var newPlanetVelocity = this.refs.editVelocityRef.value;
         var updatedPlanet = {
             title: newPlanetTitle,
-            distance: parseInt(newPlanetDistance),
-            radius: parseInt(newPlanetRadius),
+            distance: Math.abs(parseInt(newPlanetDistance)),
+            radius: Math.abs(parseInt(newPlanetRadius)),
             velocity: parseInt(newPlanetVelocity)
         };
         this.props.updateFunction(this.props.index, updatedPlanet);
         this.setState({editMode: false})
     };
+
     renderView = () => {
-        console.log(this.props.planetData.title + " "+ this.props.planetData.velocity);
+
+        console.log(this.props.planetData.title + " " + this.props.planetData.velocity);
         return (
-            <div className="panel panel-primary" onClick={this.editMode}>
+            <div className="panel panel-default" onClick={this.editMode}>
                 <div className="panel-body">
                     <div className="form-group">
                         <label>Title:</label>
@@ -51,9 +59,11 @@ export default class Planet extends Component {
             </div>
         );
     };
+
     renderEdit = () => {
+
         return (
-            <div className="panel panel-primary">
+            <div className="panel panel-default">
                 <div className="panel-body">
                     <div className="form-group">
                         <label>Title:</label>
@@ -75,10 +85,9 @@ export default class Planet extends Component {
                         <input type="number" ref="editVelocityRef" className="form-control"
                                defaultValue={this.props.planetData.velocity}/>
                     </div>
-                    <div className="form-group">
-
-                        <button onClick={this.remove} className="btn btn-danger">Delete</button>
+                    <div className="form-group text-center">
                         <button onClick={this.save} className="btn btn-default">Save</button>
+                        <button onClick={this.delete} className="btn btn-danger">Delete</button>
                     </div>
                 </div>
 
