@@ -14,14 +14,14 @@ export default class PlanetManager extends Component {
                     distance: 121,
                     isSelected: false,
                     radius: 25,
-                    velocity: 2,
+                    velocity: 8,
                     satellites: [
                         {
                             title: "Mercury's sat1",
                             distance: 40,
                             isSelected: false,
                             radius: 10,
-                            velocity: 2
+                            velocity: 5
                         }
                     ]
                 },
@@ -30,21 +30,21 @@ export default class PlanetManager extends Component {
                     distance: 220,
                     isSelected: false,
                     radius: 45,
-                    velocity: 2,
+                    velocity: 9,
                     satellites: [
                         {
                             title: "Venus's sat1",
                             distance: 30,
                             isSelected: false,
                             radius: 15,
-                            velocity: 2
+                            velocity: 5
                         },
                         {
                             title: "Venus's sat2",
                             distance: 45,
                             isSelected: false,
                             radius: 5,
-                            velocity: 2
+                            velocity: 5
                         }
                     ]
                 },
@@ -53,13 +53,13 @@ export default class PlanetManager extends Component {
                     distance: 340,
                     isSelected: false,
                     radius: 35,
-                    velocity: 2,
+                    velocity: 10,
                     satellites: [{
                         title: "Earth's sat1",
                         distance: 32,
                         isSelected: false,
                         radius: 15,
-                        velocity: 2
+                        velocity: 5
                     }]
                 },
             ]

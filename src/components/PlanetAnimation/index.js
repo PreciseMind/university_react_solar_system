@@ -24,7 +24,6 @@ export default class PlanetAnimation extends Component {
                     </div>
                     {
                         this.props.planets.map((planet, planetIndex) => {
-                            //var randomSpeed = Math.floor(Math.random() * 5) + 4;
                             var planetVelocity = planet.velocity;
                             var planetRadius = planet.radius;
 
@@ -36,12 +35,12 @@ export default class PlanetAnimation extends Component {
                                 borderRadius: '50%',
                                 transformOrigin: (planet.distance + sunRadius) + 'px ' + sunRadius + 'px 0px',
                                 marginLeft: -planet.distance + 'px',
-                                animation: 'rotate ' + planetVelocity + 's linear infinite',
+                                animation: this.defineAnimation(planetVelocity, false),
                                 position: 'absolute'
                             };
                             var planetRotateReverse = {
                                 transformOrigin: planetRadius + 'px ' + planetRadius + 'px 0px',
-                                animation: 'rotate ' + planetVelocity + 's linear infinite reverse',
+                                animation: this.defineAnimation(planetVelocity, true)
                             };
                             return (
                                 <div style={planetStyle}>
@@ -63,12 +62,12 @@ export default class PlanetAnimation extends Component {
                                                     transform: 'translate(-50%, -50%)',
                                                     transformOrigin: (satellite.distance + planetRadius) + 'px ' + planetRadius + 'px 0px',
                                                     marginLeft: -satellite.distance + 'px',
-                                                    animation: 'rotate ' + satelliteVelocity + 's linear infinite reverse',
+                                                    animation: this.defineAnimation(satelliteVelocity, false),
                                                     position: 'absolute'
                                                 };
                                                 var satellinteRotateReverse = {
                                                     transformOrigin: satelliteRadius + 'px ' + satelliteRadius + 'px 0px',
-                                                    animation: 'rotate ' + satelliteVelocity + 's linear infinite'
+                                                    animation: this.defineAnimation(satelliteVelocity, true)
                                                 };
                                                 return (
                                                     <div style={satelliteStyle}>
@@ -93,5 +92,29 @@ export default class PlanetAnimation extends Component {
             </div>
 
         )
-    }
+    };
+
+    defineAnimation = (velocity, isText) => {
+
+        var animationValue = 'rotate';
+        animationValue += ' '+Math.abs(velocity)+'s';
+        var isReverse;
+
+        animationValue+=' linear infinite';
+
+        if(isText){
+            isReverse = !(velocity<0);
+        }
+        else {
+            isReverse = (velocity<0);
+        }
+
+        if(isReverse){
+            animationValue+=' reverse';
+        }
+
+        console.log(animationValue);
+        return animationValue;
+    };
+
 }
